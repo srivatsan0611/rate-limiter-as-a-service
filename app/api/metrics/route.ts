@@ -27,7 +27,7 @@ function renderPrometheus() {
   return out;
 }
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   const body = renderPrometheus();
   return new Response(body, {
     headers: { "content-type": "text/plain; version=0.0.4" }

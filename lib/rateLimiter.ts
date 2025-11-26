@@ -1,6 +1,6 @@
 import { MemoryAdapter } from './adapters/memoryAdapter';
 import { RedisAdapter } from './adapters/redisAdapter';
-import { metrics, inc, setToken } from './metrics';
+import { inc, setToken } from './metrics';
 
 type Adapter = MemoryAdapter | RedisAdapter;
 
