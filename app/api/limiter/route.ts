@@ -3,6 +3,11 @@ import { RateLimiter } from "../../../lib/rateLimiter";
 import { MemoryAdapter } from "../../../lib/adapters/memoryAdapter";
 import { RedisAdapter } from "../../../lib/adapters/redisAdapter";
 
+// Extend globalThis for memory adapter persistence
+declare global {
+  var __memoryAdapter: MemoryAdapter | undefined;
+}
+
 // adapter selection by env var
 const REDIS_URL = process.env.REDIS_URL || '';
 
@@ -12,7 +17,6 @@ if (REDIS_URL) {
 } else {
   // keep a single MemoryAdapter across cold-start life
   if (!globalThis.__memoryAdapter) {
-    // @ts-ignore
     globalThis.__memoryAdapter = new MemoryAdapter();
   }
   adapter = globalThis.__memoryAdapter;
